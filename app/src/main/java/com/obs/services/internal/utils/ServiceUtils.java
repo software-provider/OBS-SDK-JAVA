@@ -26,6 +26,7 @@ import com.obs.services.internal.ext.ExtObsConfiguration;
 import com.obs.services.internal.ext.ExtObsConstraint;
 import com.obs.services.model.AuthTypeEnum;
 import com.obs.services.model.HttpProtocolTypeEnum;
+import io.github.pixee.security.BoundedLineReader;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
@@ -563,7 +564,7 @@ public class ServiceUtils {
             try {
                 br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 String temp;
-                while ((temp = br.readLine()) != null) {
+                while ((temp = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                     sb.append(temp);
                 }
                 ret = sb.toString();
