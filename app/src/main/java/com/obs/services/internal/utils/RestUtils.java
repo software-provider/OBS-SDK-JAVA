@@ -189,7 +189,7 @@ public class RestUtils {
             sslContext = SSLContext.getInstance("TLSv1.2");
         } catch (Exception e) {
             try {
-                sslContext = SSLContext.getInstance("TLSv1.1");
+                sslContext = SSLContext.getInstance("TLSv1.2");
             } catch (Exception ex) {
                 try {
                     sslContext = SSLContext.getInstance("TLSv1.0");
