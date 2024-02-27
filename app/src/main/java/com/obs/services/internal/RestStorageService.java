@@ -236,7 +236,7 @@ public abstract class RestStorageService extends RestConnectionService {
         String path = uri.getPath();
 
         if (!location.contains("?")) {
-            if (path == null || path.isEmpty() || path.equals("/")) {
+            if (path == null || path.isEmpty() || "/".equals(path)) {
                 isOnlyHost = true;
             }
         }

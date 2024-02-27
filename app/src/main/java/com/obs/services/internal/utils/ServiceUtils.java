@@ -71,11 +71,11 @@ public class ServiceUtils {
             .compile("^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$");
 
     public static boolean isValid(String s) {
-        return s != null && !s.equals("");
+        return s != null && !"".equals(s);
     }
 
     public static boolean isValid2(String s) {
-        return s != null && !s.equals("");
+        return s != null && !"".equals(s);
     }
 
     public static String toValid(String s) {
@@ -688,7 +688,7 @@ public class ServiceUtils {
                     String.valueOf(((ExtObsConfiguration) config).getMaxRetryOnUnexpectedEndException()));
         }
         if (null != config.getXmlDocumentBuilderFactoryClass()
-                && !config.getXmlDocumentBuilderFactoryClass().trim().equals("")) {
+                && !"".equals(config.getXmlDocumentBuilderFactoryClass().trim())) {
             obsProperties.setProperty(ObsConstraint.OBS_XML_DOC_BUILDER_FACTORY,
                     config.getXmlDocumentBuilderFactoryClass());
         }

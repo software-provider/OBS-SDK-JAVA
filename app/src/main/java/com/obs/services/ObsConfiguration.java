@@ -453,7 +453,7 @@ public class ObsConfiguration implements Cloneable {
      * @return OBS endpoint
      */
     public String getEndPoint() {
-        if (endPoint == null || endPoint.trim().equals("")) {
+        if (endPoint == null || "".equals(endPoint.trim())) {
             throw new IllegalArgumentException("EndPoint is not set");
         }
         return endPoint.trim();

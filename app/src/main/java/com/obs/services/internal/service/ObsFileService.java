@@ -197,7 +197,7 @@ public abstract class ObsFileService extends ObsObjectService {
         TransResult result = this.transGetContentSummaryFs(contentSummaryFsRequest);
 
         Response httpResponse = performRestGet(contentSummaryFsRequest.getBucketName(),
-                contentSummaryFsRequest.getDirName().equals("/") ? null : contentSummaryFsRequest.getDirName(),
+                "/".equals(contentSummaryFsRequest.getDirName()) ? null : contentSummaryFsRequest.getDirName(),
                 result.getParams(), null, contentSummaryFsRequest.getUserHeaders());
 
         this.verifyResponseContentType(httpResponse);

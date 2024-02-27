@@ -21,7 +21,7 @@ public class Logger implements ILogger {
         Class<?> loggerCls = LoggerBuilder.GetLoggerHolder.loggerClass;
         if (logger instanceof java.util.logging.Logger) {
             this.delegate = new BasicLogger((java.util.logging.Logger) logger);
-        } else if (loggerCls != null && loggerCls.getName().equals("org.apache.log4j.Logger")) {
+        } else if (loggerCls != null && "org.apache.log4j.Logger".equals(loggerCls.getName())) {
             this.delegate = new Log4jLogger(logger);
         } else {
             this.delegate = new Log4j2Logger(logger);

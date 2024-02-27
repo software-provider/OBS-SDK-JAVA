@@ -276,17 +276,17 @@ public class ObsService extends ObsExtensionService {
             if (ServiceUtils.isValid(entry.getKey())) {
                 String key = entry.getKey().toLowerCase().trim();
 
-                if (key.equals("bucket")) {
+                if ("bucket".equals(key)) {
                     matchAnyBucket = false;
-                } else if (key.equals("key")) {
+                } else if ("key".equals(key)) {
                     matchAnyKey = false;
                 }
 
                 if (!Constants.ALLOWED_REQUEST_HTTP_HEADER_METADATA_NAMES.contains(key)
                         && !key.startsWith(this.getRestHeaderPrefix(request.getBucketName()))
-                        && !key.startsWith(Constants.OBS_HEADER_PREFIX) && !key.equals("acl")
-                        && !key.equals("bucket") && !key.equals("key") && !key.equals("success_action_redirect")
-                        && !key.equals("redirect") && !key.equals("success_action_status")) {
+                        && !key.startsWith(Constants.OBS_HEADER_PREFIX) && !"acl".equals(key)
+                        && !"bucket".equals(key) && !"key".equals(key) && !"success_action_redirect".equals(key)
+                        && !"redirect".equals(key) && !"success_action_status".equals(key)) {
                     continue;
                 }
                 String value = entry.getValue() == null ? "" : entry.getValue().toString();
@@ -453,7 +453,7 @@ public class ObsService extends ObsExtensionService {
                 || originalKey.startsWith(this.getRestHeaderPrefix(bucketName))
                 || originalKey.startsWith(Constants.OBS_HEADER_PREFIX)) {
             return originalKey;
-        } else if (requestMethod.equals("PUT") || requestMethod.equals("POST")) {
+        } else if ("PUT".equals(requestMethod) || "POST".equals(requestMethod)) {
             return this.getRestMetadataPrefix(bucketName) + originalKey;
         }
         

@@ -58,7 +58,7 @@ public class V2Convertor extends V2BucketConvertor {
     }
 
     public static String getEncodedString(String value, String encodingType) {
-        if (encodingType != null && encodingType.toLowerCase().equals("url")) {
+        if (encodingType != null && "url".equals(encodingType.toLowerCase())) {
             try {
                 return URLEncoder.encode(value, "UTF-8");
             } catch (UnsupportedEncodingException exception) {

@@ -448,7 +448,7 @@ public class RestUtils {
             }
             builder.proxy(new java.net.Proxy(Type.HTTP, new InetSocketAddress(proxyHostAddress, proxyPort)));
 
-            if (proxyUser != null && !proxyUser.trim().equals("")) {
+            if (proxyUser != null && !"".equals(proxyUser.trim())) {
                 Authenticator proxyAuthenticator = new Authenticator() {
                     @Override
                     public Request authenticate(Route route, Response response) throws IOException {

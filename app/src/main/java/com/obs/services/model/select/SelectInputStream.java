@@ -354,9 +354,9 @@ public class SelectInputStream extends InputStream {
                         throw new IOException("Missing message type in OBS Select message");
                     }
         
-                    if (messageType.equals("event")) {
+                    if ("event".equals(messageType)) {
                         processEvent(headers);
-                    } else if (messageType.equals("error")) {
+                    } else if ("error".equals(messageType)) {
                         throw new SelectObjectException(headers.get(":error-code"), headers.get(":error-message"));
                     } else {
                         throw new IOException("Unsupported message type '" + messageType + "'' in OBS Select message");
@@ -406,8 +406,8 @@ public class SelectInputStream extends InputStream {
         tmp.limit(totalLength - 4);
 
         ByteBuffer payload = tmp.slice();
-        if (eventType.equals("Records")) {
-            if (!contentType.equals(OCTET_STREAM_TYPE)) {
+        if ("Records".equals(eventType)) {
+            if (!OCTET_STREAM_TYPE.equals(contentType)) {
                 throw new IOException("Stream type '" + contentType + "' for Records event in OBS Select is not supported");
             }
 
@@ -436,21 +436,21 @@ public class SelectInputStream extends InputStream {
             return;
         }
         
-        if (eventType.equals("Cont")) {
+        if ("Cont".equals(eventType)) {
             if (visitor != null) {
                 visitor.visitContinuationEvent();
             }
             return;
         }
         
-        if (eventType.equals("Stats") || eventType.equals("Progress")) {
-            if (!contentType.equals(XML_STREAM_TYPE)) {
+        if ("Stats".equals(eventType) || "Progress".equals(eventType)) {
+            if (!XML_STREAM_TYPE.equals(contentType)) {
                 throw new IOException("Stream type '" + contentType + "' for " + eventType + " event in OBS Select is not supported");
             }
 
             if (visitor != null) {
                 Stats stats = extractStats(payload, eventType);
-                if (eventType.equals("Stats")) {
+                if ("Stats".equals(eventType)) {
                     visitor.visitStatsEvent(stats.bytesScanned, stats.bytesProcessed, stats.bytesReturned);
                 } else {
                     visitor.visitProgressEvent(stats.bytesScanned, stats.bytesProcessed, stats.bytesReturned);
@@ -459,7 +459,7 @@ public class SelectInputStream extends InputStream {
             return;
         }
         
-        if (eventType.equals("End")) {
+        if ("End".equals(eventType)) {
             if (visitor != null) {
                 visitor.visitEndEvent();
             }
@@ -523,11 +523,11 @@ public class SelectInputStream extends InputStream {
                     }
 
                     long stat = Long.parseLong(value.getTextContent());
-                    if (name.equals("BytesScanned")) {
+                    if ("BytesScanned".equals(name)) {
                         stats.bytesScanned = stat;
-                    } else if (name.equals("BytesProcessed")) {
+                    } else if ("BytesProcessed".equals(name)) {
                         stats.bytesProcessed = stat;
-                    } else if (name.equals("BytesReturned")) {
+                    } else if ("BytesReturned".equals(name)) {
                         stats.bytesReturned = stat;
                     } else {
                         throw new IOException("Unknown element " + name + " in " + event + " document in OBS Select");

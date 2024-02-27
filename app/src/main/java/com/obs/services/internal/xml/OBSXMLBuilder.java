@@ -40,7 +40,7 @@ public class OBSXMLBuilder extends BaseXMLBuilder {
     
     public static void setXmlDocumentBuilderFactoryClass(String className) {
         if (null != className 
-                && !className.trim().equals("")) {
+                && !"".equals(className.trim())) {
             xmlDocumentBuilderFactoryClass = className;
         }
     }
